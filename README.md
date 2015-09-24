@@ -12,14 +12,15 @@ make
 
 adjust makefile to fit your system for
 
-###lib:
+### lib:
 
 1.  comLib library path
 2.  boost library path
-###include:
 
-3.  boost include path
-4.  comLib include path
+### include:
+
+1.  boost include path
+2.  comLib include path
 
 alternatively just use these environment variables for g++ compilation
 
