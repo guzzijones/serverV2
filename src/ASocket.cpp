@@ -1,11 +1,12 @@
 #include "ASocket.h"
 
+
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(atodo)
 BOOST_CLASS_EXPORT(todoExec)
 
 ASocket::ASocket(int inPort,int inMaxListenters){
-  std::unique_ptr<todoFactory> tmpTodoFactory=todoFactory::create();
-  _ATodoFactory=std::move(tmpTodoFactory);
+//  std::unique_ptr<todoFactory> tmpTodoFactory=todoFactory::create();
+ // _ATodoFactory=std::move(tmpTodoFactory);
  listenfd = socket(AF_INET,SOCK_STREAM,0);   
  maxListeners=inMaxListenters;
  port=inPort;
@@ -51,9 +52,9 @@ signal(SIGCHLD,SIG_IGN);
          std::cout << "done reading" << std::endl; 
          std::unique_ptr<aTodo> DoThis;
          //instanciate an instance of aTodo to complete the action requested
-         DoThis=_ATodoFactory->load(remainder);
+         DoThis=protocolCom::load(remainder);
          DoThis->Do();//do whatever
-         std::string afterDone = _ATodoFactory->save(DoThis);
+         std::string afterDone = protocolCom::save(DoThis);
          pBase.DoWrite(afterDone);
       }catch(std::exception &e)
       {

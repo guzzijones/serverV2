@@ -29,6 +29,7 @@ extern "C"
 #include <vector>
 #include <string>
 #include "protocolBaseServer.h"
+#include "protocolCom.h"
 #include "todoFactory.h"
 #include <memory>
 class ASocket{
