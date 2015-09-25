@@ -47,15 +47,13 @@ signal(SIGCHLD,SIG_IGN);
       
       try{
          protocolBaseServer pBase(newSockFd);
-         pBase.DoRead();
-         std::string remainder=pBase.getTotalMessage();
-         std::cout << "done reading" << std::endl; 
          std::unique_ptr<aTodo> DoThis;
-         //instanciate an instance of aTodo to complete the action requested
-         DoThis=protocolCom::load(remainder);
+
+         DoThis=protocolCom::Read(pBase);
+         std::cout << "done reading" << std::endl; 
          DoThis->Do();//do whatever
-         std::string afterDone = protocolCom::save(DoThis);
-         pBase.DoWrite(afterDone);
+         protocolCom::Write(DoThis,pBase);
+
       }catch(std::exception &e)
       {
          std::cout << "exception: " << e.what();
