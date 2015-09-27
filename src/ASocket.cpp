@@ -1,7 +1,7 @@
 #include "ASocket.h"
 
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(atodo)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(aTodo)
 BOOST_CLASS_EXPORT(todoExec)
 
 ASocket::ASocket(int inPort,int inMaxListenters){
@@ -49,7 +49,7 @@ signal(SIGCHLD,SIG_IGN);
          protocolBaseServer pBase(newSockFd);
          std::unique_ptr<aTodo> DoThis;
 
-         DoThis=protocolCom::Read(pBase);
+         DoThis=protocolCom::Read<aTodo>(pBase);
          std::cout << "done reading" << std::endl; 
          DoThis->Do();//do whatever
          protocolCom::Write(DoThis,pBase);
